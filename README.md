@@ -9,7 +9,7 @@ https://www.lri.fr/~conchon/PFA/PROJET/index.html
 ## To play
 
 1) clone the  repository or download it 
- `git clone https://github.com/Azakira/Sudoku.git`                                                                                   
+ [`git clone https://github.com/2chenj/sudoku.git`]                                                                                 
 2) from where u called the above command line, compile the files with                                                                                                           
 `make`
 3) start playing the game with the following                                                                                           
