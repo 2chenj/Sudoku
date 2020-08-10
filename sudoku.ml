@@ -72,7 +72,43 @@ let initGrille str =
 	mat
 
 ;;
- 
+
+(*function called but sudokusolver*)
+let solve_helper mat value abs ord  =
+    let hor = ref 0 in
+    for j=0 to 8 do
+        if fst (mat.(abs).(j))= value then hor := !hor+1
+    done;
+    let ver = ref 0 in
+    for j=0 to 8 do
+        if fst (mat.(abs).(j))= value then ver := !ver+1
+    done;
+    if !hor !=0 || !ver !=0 then false else
+    let inSquare = ref 0 in 
+        for i=abs/3 to (abs/3)+3 do
+                for j=ord/3 to (ord/3)+3 do
+        if fst (mat.(i).(j))=value then inSquare := !inSquare+1
+                done;
+        done;
+    !inSquare =0
+;;
+
+(* sudokuSolver given a matrix of (char,bool)
+    return a solved matrix
+*)
+let rec sudoku_solver mat = 
+        let resMat = ref mat in 
+	for i=0 to 8 do
+			for j=0 to 8 do
+                            for pVal=1 to 8 do
+                                    if fst (!resMat.(i).(j)) ='0'then
+                                            if solve_helper !resMat (char_of_int pVal) i j  then !resMat.(i).(j) <- (char_of_int pVal,true)
+                            done;
+                        done;
+                        resMat := sudoku_solver !resMat
+        done;
+    !resMat
+;;
 
 (*procedure affiche_grille print symbols representing a grid 
   @param a 9*9 matrix of couples (int as a char, bool)
